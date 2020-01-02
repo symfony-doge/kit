@@ -1,7 +1,7 @@
 
 # Symfony Doge's Kit
 
-This container-based kit used in the [veslo](https://github.com/symfony-doge/veslo) project and contains the following GUI tools
+This container-based kit used in the [veslo](https://github.com/symfony-doge/veslo) project contains the following GUI tools
 for managing data & processes of your web application:
 
 - pgAdmin (https://www.pgadmin.org/) for [postgres](https://hub.docker.com/_/postgres).
