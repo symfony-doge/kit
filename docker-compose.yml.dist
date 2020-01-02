@@ -1,0 +1,38 @@
+
+version: '2'
+
+services:
+    pgadmin:
+        image: dpage/pgadmin4:${PGADMIN_VERSION}
+        networks:
+            - backend
+        environment:
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER_NAME}
+            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_USER_PASSWORD}
+        ports:
+            - "${PGADMIN_PORT_EXPOSE}:80"
+        volumes:
+            - pgadmin_data:${PGADMIN_DATA_DIR}
+
+    redis-commander:
+        image: rediscommander/redis-commander:${REDIS_COMMANDER_VERSION}
+        networks:
+            - backend
+        environment:
+            REDIS_HOST: ${REDIS_COMMANDER_DATA_HOST}
+            REDIS_PORT: ${REDIS_COMMANDER_DATA_PORT}
+        ports:
+            - "${REDIS_COMMANDER_PORT_EXPOSE}:8081"
+
+networks:
+    backend:
+        external:
+            name: ${APP_NETWORK_NAME}
+
+volumes:
+    pgadmin_data:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${PWD}/data/pgadmin
+            o: bind
