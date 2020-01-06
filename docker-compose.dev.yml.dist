@@ -7,12 +7,14 @@ services:
         networks:
             - backend
         environment:
-            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER_NAME}
-            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_USER_PASSWORD}
+            PGADMIN_DEFAULT_EMAIL: 'disabled-in-desktop-mode'
+            PGADMIN_DEFAULT_PASSWORD: 'disabled-in-desktop-mode'
+            PGADMIN_CONFIG_SERVER_MODE: 'False'
+            PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
         ports:
             - "${PGADMIN_PORT_EXPOSE}:80"
         volumes:
-            - pgadmin_data:${PGADMIN_DATA_DIR}
+            - pgadmin_data:/var/lib/pgadmin
 
     redis-commander:
         image: rediscommander/redis-commander:${REDIS_COMMANDER_VERSION}
