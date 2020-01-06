@@ -14,11 +14,19 @@ for managing data & processes of your web application:
 You need to have a [Docker](https://docs.docker.com/install) daemon at least [17.05.0-ce](https://docs.docker.com/engine/release-notes/#17050-ce)
 (with build-time `ARG` in `FROM`) and the [docker-compose](https://docs.docker.com/compose) tool to successfully cook all containers.
 
+You can choose one of the out-of-box templates for your compose project:
+
+|         | development     | production    |
+| :------ | :------ | :------ |
+|         | `docker-compose.dev.yml.dist` | `docker-compose.prod.yml.dist` |
+| network | external, using the existing one by `APP_NETWORK_NAME` to access services | custom, using [SSH tunnels](https://github.com/symfony-doge/docker-ssh-tunnel) to production servers       |
+| ports   | `5050` - pgAdmin<br />`7070` - Redis Commander | `5151` - pgAdmin<br />`7171` - Redis Commander |
+
 Copy and adjust parameters for your environment: 
 
 ```
 $ cp .env.dist .env
-$ cp .docker-compose.yml.dist docker-compose.yml
+$ cp .docker-compose.dev.yml.dist docker-compose.yml
 ```
 
 Ensure users inside docker containers have permissions to the data persistence directories.

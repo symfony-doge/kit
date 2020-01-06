@@ -19,8 +19,10 @@ services:
         networks:
             - backend
         environment:
+            #REDIS_HOSTS: ${REDIS_COMMANDER_DATA_HOSTS}
             REDIS_HOST: ${REDIS_COMMANDER_DATA_HOST}
             REDIS_PORT: ${REDIS_COMMANDER_DATA_PORT}
+            REDIS_DB: ${REDIS_COMMANDER_DATA_DB}
         ports:
             - "${REDIS_COMMANDER_PORT_EXPOSE}:8081"
 
