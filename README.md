@@ -1,11 +1,13 @@
 
 # Symfony Doge's Kit
 
-This container-based kit used in the [veslo](https://github.com/symfony-doge/veslo) project contains the following GUI tools
-for managing data & processes of your web application:
+This container-based kit (was initially used in the [Veslo](https://github.com/symfony-doge/veslo) project)
+contains the following GUI tools for managing data & processes of your web application:
 
 - pgAdmin (https://www.pgadmin.org/) for [postgres](https://hub.docker.com/_/postgres).
 - Redis Commander (https://joeferner.github.io/redis-commander/) for [redis](https://hub.docker.com/_/redis/).
+
+The kit is designed to provide access from your **personal machine** and supports configuration for managing both local and remote services. 
 
 ## Installation
 
