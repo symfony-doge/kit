@@ -44,5 +44,27 @@ Run the services through `docker-compose`:
 $ docker-compose up -d
 ```
 
+## Tips
+
+### pgAdmin
+
+For dashboard statistics in production (sessions, transactions per second and other stuff)
+you need to setup an SSH tunnel directly in the server configuration
+of your pgadmin web app (not docker). A quick solution can be:
+
+1. Copy your `~/.ssh/id_rsa` into persistence directory of the compose project, for example, `data/pgadmin-ssh-import/id_rsa` and
+set owning to `5050:5050` (check uid/gid of pgadmin user within docker container)
+
+2. Add a volume mapping to `docker-compose.yml` like that:
+
+```
+...
+    pgadmin:
+        ...
+        volumes:
+            - ${PWD}/data/pgadmin-ssh-import/id_rsa:/pgadmin4/ssh-import/id_rsa:ro
+            - pgadmin_data:/var/lib/pgadmin
+```
+
 ## Changelog
 All notable changes to this project will be documented in [CHANGELOG.md](CHANGELOG.md).
