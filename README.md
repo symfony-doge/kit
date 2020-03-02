@@ -49,8 +49,7 @@ $ docker-compose up -d
 ### pgAdmin
 
 For dashboard statistics in production (sessions, transactions per second and other stuff)
-you need to setup an SSH tunnel directly in the server configuration
-of your pgadmin web app (not docker). A quick solution can be:
+you need to setup an SSH tunnel directly in the server configuration menu* of your pgadmin web app (not docker). A quick solution can be:
 
 1. Copy your `~/.ssh/id_rsa` into persistence directory of the compose project, for example, `data/pgadmin-ssh-import/id_rsa` and
 set owning to `5050:5050` (check uid/gid of pgadmin user within docker container)
@@ -65,6 +64,8 @@ set owning to `5050:5050` (check uid/gid of pgadmin user within docker container
             - ${PWD}/data/pgadmin-ssh-import/id_rsa:/pgadmin4/ssh-import/id_rsa:ro
             - pgadmin_data:/var/lib/pgadmin
 ```
+
+\* — See also [servers.json](https://www.pgadmin.org/docs/pgadmin4/latest/export_import_servers.html) file for the pre-install stage.
 
 ## Changelog
 All notable changes to this project will be documented in [CHANGELOG.md](CHANGELOG.md).
