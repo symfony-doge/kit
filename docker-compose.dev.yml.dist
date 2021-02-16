@@ -16,6 +16,15 @@ services:
         volumes:
             - pgadmin_data:/var/lib/pgadmin
 
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:${PHPMYADMIN_VERSION}
+        networks:
+            - backend
+        environment:
+            PMA_HOST: ${PHPMYADMIN_DATABASE_HOST}
+        ports:
+            - "${PHPMYADMIN_PORT_EXPOSE}:80"
+
     redis-commander:
         image: rediscommander/redis-commander:${REDIS_COMMANDER_VERSION}
         networks:
@@ -39,4 +48,11 @@ volumes:
         driver_opts:
             type: none
             device: ${PWD}/data/pgadmin
+            o: bind
+
+    phpmyadmin_data:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${PWD}/data/phpmyadmin
             o: bind

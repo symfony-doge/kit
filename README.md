@@ -2,12 +2,14 @@
 # Symfony Doge's Kit
 
 This container-based kit (was initially used in the [Veslo](https://github.com/symfony-doge/veslo) project)
-contains the following GUI tools for managing data & processes of your web application:
+contains the following collection of configurations to manage data & processes of your web application:
 
 - pgAdmin (https://www.pgadmin.org/) for [postgres](https://hub.docker.com/_/postgres).
-- Redis Commander (https://joeferner.github.io/redis-commander/) for [redis](https://hub.docker.com/_/redis/).
+- phpMyAdmin (https://www.phpmyadmin.net/) for [mysql](https://hub.docker.com/_/mysql).
+- Redis Commander (https://joeferner.github.io/redis-commander/) for [redis](https://hub.docker.com/_/redis).
 
-The kit is designed to provide access from your **personal machine** and supports configuration for managing both local and remote services. 
+The kit is designed to provide access from your **personal machine** and supports configuration for managing both local
+and remote services. It is focused on lightweight **web interfaces** rather than their desktop alternatives. 
 
 ## Installation
 
@@ -22,7 +24,7 @@ You can choose one of the out-of-box templates for your compose project:
 | :------ | :------ | :------ |
 |         | `docker-compose.dev.yml.dist` | `docker-compose.prod.yml.dist` |
 | network | external, using the existing one by `APP_NETWORK_NAME` to access services | custom, using [SSH tunnels](https://github.com/symfony-doge/docker-ssh-tunnel) to production servers       |
-| ports   | `5050` - pgAdmin<br />`7070` - Redis Commander | `5151` - pgAdmin<br />`7171` - Redis Commander |
+| ports   | `5050` - pgAdmin<br />`6644` - phpMyAdmin<br />`7070` - Redis Commander | `5151` - pgAdmin<br />`6645` - phpMyAdmin<br />`7171` - Redis Commander |
 
 Copy and adjust parameters for your environment: 
 

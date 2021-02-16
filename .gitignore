@@ -1,3 +1,4 @@
+
 .idea/
 
 .env
@@ -7,6 +8,10 @@
 !/data/pgadmin
 /data/pgadmin/*
 !data/pgadmin/.gitkeep
+
+!/data/phpmyadmin
+/data/phpmyadmin/*
+!data/phpmyadmin/.gitkeep
 
 # docker
 docker-compose.yml

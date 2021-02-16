@@ -2,18 +2,18 @@
 version: '2'
 
 services:
-    ssh-tunnel-db:
+    ssh-tunnel-pg:
         image: symfonydoge/docker-ssh-tunnel:${SSH_TUNNEL_VERSION}
         volumes:
             - $HOME/.ssh/id_rsa:/root/ssh-import/id_rsa:ro
         environment:
-            SSH_TUNNEL_HOST: ${SSH_TUNNEL_DB_HOST}
-            REMOTE_PORT: ${SSH_TUNNEL_DB_PORT}
+            SSH_TUNNEL_HOST: ${SSH_TUNNEL_PG_HOST}
+            REMOTE_PORT: ${SSH_TUNNEL_PG_PORT}
 
     pgadmin:
         image: dpage/pgadmin4:${PGADMIN_VERSION}
         depends_on:
-            - ssh-tunnel-db
+            - ssh-tunnel-pg
         environment:
             PGADMIN_DEFAULT_EMAIL: 'disabled-in-desktop-mode'
             PGADMIN_DEFAULT_PASSWORD: 'disabled-in-desktop-mode'
@@ -23,6 +23,21 @@ services:
             - "${PGADMIN_PORT_EXPOSE}:80"
         volumes:
             - pgadmin_data:/var/lib/pgadmin
+
+    ssh-tunnel-my:
+        image: symfonydoge/docker-ssh-tunnel:${SSH_TUNNEL_VERSION}
+        volumes:
+            - $HOME/.ssh/id_rsa:/root/ssh-import/id_rsa:ro
+        environment:
+            SSH_TUNNEL_HOST: ${SSH_TUNNEL_MY_HOST}
+            REMOTE_PORT: ${SSH_TUNNEL_MY_PORT}
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:${PHPMYADMIN_VERSION}
+        environment:
+            PMA_HOST: ${PHPMYADMIN_DATABASE_HOST}
+        ports:
+            - "${PHPMYADMIN_PORT_EXPOSE}:80"
 
     ssh-tunnel-redis:
         image: symfonydoge/docker-ssh-tunnel:${SSH_TUNNEL_VERSION}
@@ -50,4 +65,11 @@ volumes:
         driver_opts:
             type: none
             device: ${PWD}/data/pgadmin
+            o: bind
+
+    phpmyadmin_data:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${PWD}/data/phpmyadmin
             o: bind
